@@ -22,14 +22,23 @@ public:
 
   //  set the ADC parameters
   //  can be changed runtime, e.g if voltage fluctuates.
-  bool  begin(float maxVoltage, uint16_t maxSteps);
-  
-  //  returns voltage
-  float read(uint8_t times = 1);
+  bool     begin(float maxVoltage, uint16_t maxSteps);
 
-  //  returns last read value as percentage.
+  //  returns steps
+  float    raw(uint8_t times = 1);
+  //  returns voltage
+  float    read(uint8_t times = 1);
+
+
+  //  ANALYSIS
+  //  returns last read value as percentage of maxVoltage.
   //  indicating wetness?
-  float percentage();
+  float    percentage();
+
+  //  level = 1..4 (level 0 == 0 Volt)
+  //  user is responsible that values are increasing voltages.
+  bool     setLevel(uint8_t nr, float voltage);
+  uint8_t  getLevel();
 
 
 private:
@@ -37,7 +46,8 @@ private:
   float    _maxVoltage;
   uint16_t _maxSteps;
   float    _mVstep;
-  float    _value;
+  float    _voltage;
+  float    _level[5] = { 0, 1, 2, 3, 4 };  // default
 };
 
 

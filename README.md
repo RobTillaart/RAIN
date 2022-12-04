@@ -33,9 +33,19 @@ port is the internal analog port to use.
 - **bool  begin(float maxVoltage, uint16_t maxSteps)** sets the ADC parameters. 
 Allows to be changed runtime, e.g. if voltage fluctuates the math can be adapted by calling **begin()** again. 
 Might be a separate **setVoltage()** is more efficient.
+- **float raw(uint8_t times = 1)** makes 1 or more measurements and averages them.
+returned value is the average number of ADC steps.
 - **float read(uint8_t times = 1)** makes 1 or more measurements, averages them and convert the average to a voltage.
+THis voltage is returned, and also cached for **percentage()** and **getLevel()**.
+
+#### Analysis
+
 - **float percentage()** returns the last **read()** to a percentage.
 Note one needs to call read() again to get a new value as this uses a cached value.
+- **bool setLevel(uint8_t nr, float voltage)** allows a user to set 5 voltage levels. 
+- **uint8_t  getLevel()**
+Returns the level of the current cached voltage. 
+See example.
 
 
 #### MultiMap
@@ -61,15 +71,17 @@ The examples show the basic working of the functions.
   - different liquids? which?
   - how linear is the device?
 
+
 #### Should
 - investigate "a scale of wetness"
 - add unit-tests
 - add examples.
-- add calibration some sort, so people can map e.g. depth on voltage?
-- output as percentage?
+  - interrupt example for digital output capture.
+  - multimap example 
 - investigate possibilities of the digital output 
   - how to include
-- **float readExt(float val)** for extern ADC
+  - example (see above)
+- **float readExt(float voltage)** for external ADC
 
 
 #### Could

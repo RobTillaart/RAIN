@@ -19,6 +19,13 @@ void setup()
   Serial.println("EXPERIMENTAL:");
 
   RS.begin(5.000, 1023);
+
+  //  set the levels
+  //  no need to be equi-distant
+  RS.setLevel(1, 0.25);
+  RS.setLevel(2, 2.75);
+  RS.setLevel(3, 3.25);
+  RS.setLevel(4, 3.50);
 }
 
 
@@ -26,9 +33,9 @@ void loop()
 {
   Serial.print(RS.read(), 3);
   Serial.print('\t');
-  Serial.print(RS.percentage(), 1);
+  Serial.print(RS.getLevel());
   Serial.print('\n');
-  delay(1000);
+  delay(10);
 }
 
 

@@ -28,7 +28,7 @@ bool RAIN::begin(float maxVoltage, uint16_t maxSteps)
 }
 
 
-float RAIN::read(uint8_t times)
+float RAIN::raw(uint8_t times)
 {
   if (times == 0) times = 1;
   float sum = 0;
@@ -37,14 +37,39 @@ float RAIN::read(uint8_t times)
     sum += analogRead(_port);
   }
   if (times > 1) sum /= times;
-  _value = sum * _mVstep;
-  return _value;
+  return sum;
+}
+
+
+float RAIN::read(uint8_t times)
+{
+  _voltage = raw(times) * _mVstep;
+  return _voltage;
 }
 
 
 float RAIN::percentage()
 {
-  return _value * 100.0 / _maxVoltage;
+  return _voltage * 100.0 / _maxVoltage;
+}
+
+
+bool RAIN::setLevel(uint8_t nr, float voltage)
+{
+  if (nr == 0) return false;
+  if (nr > 4) return false;
+  _level[nr] = voltage;
+  return true;
+}
+
+
+uint8_t RAIN::getLevel()
+{
+  for (int index = 4; index > 0; index--)
+  {
+    if (_voltage >= _level[index]) return index;
+  }
+  return 0;
 }
 
 
