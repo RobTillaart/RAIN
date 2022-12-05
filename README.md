@@ -23,7 +23,7 @@ threshold (to be set with a potentiometer on the breakout) is reached.
 The meaning / potential of this digital-out for the library needs to be investigated.
 
 The library is EXPERIMENTAL as it needs more testing. 
-(changes of the interface are possible).
+(changes of the interface are definitely possible).
 
 
 ## Interface
@@ -42,7 +42,9 @@ THis voltage is returned, and also cached for **percentage()** and **getLevel()*
 
 - **float percentage()** returns the last **read()** to a percentage.
 Note one needs to call read() again to get a new value as this uses a cached value.
-- **bool setLevel(uint8_t nr, float voltage)** allows a user to set 5 voltage levels. 
+- **float delta()** returns the delta voltage compared to previous read.
+It give the first derivative of the signal. How fast does it rise.
+- **bool setLevel(uint8_t nr, uint16_t millivolts)** allows a user to set 5 voltage levels in milliVolts.
 - **uint8_t getLevel()**
 Returns the level of the current cached voltage. 
 See example.
@@ -79,9 +81,7 @@ The examples show the basic working of the functions.
 
 #### Should
 - optimizations
-  - level array could be in millivolts uint16_t - less RAM.
-  - a lot of floats...
-    - more uint16_t millivolts?
+  - a lot of floats...==> more uint16_t millivolts?
 - add examples.
 - investigate possibilities of the digital output 
   - how to include
@@ -104,7 +104,8 @@ The examples show the basic working of the functions.
   - different salinity
   - different liquids? which?
   - how linear is the device?
-
+- **incrLevel(nr, amount = 1)** + **decrLevel(nr, amount = 1)**
+  to allow easier runtime tuning
 
 #### Won't
 - example with multiMap

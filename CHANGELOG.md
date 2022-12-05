@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.1.1] - 2022-12-03
-- update keywords.txt
+- change levels to milliVolts (uint16_t).
+- rewrite setLevel(milliVolts) and getLevel().
 - update readme.md
 - add/update examples
+- update keywords.txt
+- add delta() => delta with previous read().
 
 
 ## [0.1.0] - 2022-12-03

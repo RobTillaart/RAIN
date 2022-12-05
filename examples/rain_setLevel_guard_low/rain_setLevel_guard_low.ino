@@ -25,13 +25,13 @@ void setup()
 
   RS.begin(5.000, 1023);  //  adjust if needed
 
-  //  set the levels
+  //  set the levels in milliVolts
   //  very low levels need to start the pump quite fast.
   //  adapt to your needs.
-  RS.setLevel(1, 0.05);
-  RS.setLevel(2, 0.10);
-  RS.setLevel(3, 0.20);
-  RS.setLevel(4, 0.50);
+  RS.setLevel(1,  50);
+  RS.setLevel(2, 100);
+  RS.setLevel(3, 200);
+  RS.setLevel(4, 500);
 
 }
 
