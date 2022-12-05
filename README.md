@@ -8,19 +8,19 @@
 
 # RAIN
 
-Arduino library for rain sensor (analog).
+RAIN is an Arduino library for a rain sensor (analog).
 
 
 ## Description
 
-The RAIN sensor is a relative simple device. 
-It measures the resistance of a number of wires when these are put un a liquid (water)
-The device converts that resistance to a voltage 0..VCC - typical 5V.
+A rain sensor is a relative simple device. 
+It measures the resistance of a number of wires when these are put in a liquid (water)
+The device converts the resistance to a voltage typical 0 .. 5 Volt.
 The more the wires are covered by the liquid, the higher the voltage.
 
-Furthermore the breakout I used to test had a digital output, which becomes HIGH if a certain
-threshold (to be set with a potentiometer) was reached.
-The meaning / potential of this digi-out for the library is not clear yet.
+The breakout I used to test also has a digital output, which goes HIGH if a certain
+threshold (to be set with a potentiometer on the breakout) is reached.
+The meaning / potential of this digital-out for the library needs to be investigated.
 
 The library is EXPERIMENTAL as it needs more testing. 
 (changes of the interface are possible).
@@ -43,15 +43,24 @@ THis voltage is returned, and also cached for **percentage()** and **getLevel()*
 - **float percentage()** returns the last **read()** to a percentage.
 Note one needs to call read() again to get a new value as this uses a cached value.
 - **bool setLevel(uint8_t nr, float voltage)** allows a user to set 5 voltage levels. 
-- **uint8_t  getLevel()**
+- **uint8_t getLevel()**
 Returns the level of the current cached voltage. 
 See example.
+
+The library allows the user to set 5 thresholds or levels for the **getLevel()** function.
+These 5 levels can help to control behaviour at a certain level. 
+Typical levels are almost empty, to almost full and full. 
+The level do not need to be on a linear mapping like 20% steps, if your project need 
+other levels you can define these.
+
+Note it is possible to adjust the levels runTime with **setLevel()**
 
 
 #### MultiMap
 
-One might use the **MultiMap** library to map the voltage read to some
-other, more useful unit.
+For a continuous mapping one can use the **MultiMap** library. 
+It allows to map the voltage to any other useful unit as it can handle 
+even non-linearities well.
 See https://github.com/RobTillaart/MultiMap
 
 
@@ -64,29 +73,40 @@ The examples show the basic working of the functions.
 
 #### Must
 - update documentation
-  - a lot, 
   - links etc.
-- test more
+- add interrupt example for digital output capture.
+
+
+#### Should
+- optimizations
+  - level array could be in millivolts uint16_t - less RAM.
+  - a lot of floats...
+    - more uint16_t millivolts?
+- add examples.
+- investigate possibilities of the digital output 
+  - how to include
+  - example (see above)
+- improve the **percentage()** maxVoltage setter?
+  - 2 different meanings of maxVoltage. For ADC and sensor out.
+  - is the device linear? does percentage make sense if it is not?
+
+
+#### Could
+- add unit-tests
+- make the number of levels configurable
+  - dynamic array allocation.?
+- **float readExt(float voltage)** for external ADC
+- investigate level-changed "event"
+- investigate: **getLevel()** should it do a read()?
+  - **setForcedRead(bool flag)** + getter
+- investigate "a scale of wetness"
+- investigate
   - different salinity
   - different liquids? which?
   - how linear is the device?
 
 
-#### Should
-- investigate "a scale of wetness"
-- add unit-tests
-- add examples.
-  - interrupt example for digital output capture.
-  - multimap example 
-- investigate possibilities of the digital output 
-  - how to include
-  - example (see above)
-- **float readExt(float voltage)** for external ADC
-
-
-#### Could
-
-
 #### Won't
-
+- example with multiMap
+  - see multiMap library.
 

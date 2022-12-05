@@ -33,6 +33,7 @@ public:
   //  ANALYSIS
   //  returns last read value as percentage of maxVoltage.
   //  indicating wetness?
+  //  it assumes / implies linear behaviour
   float    percentage();
 
   //  level = 1..4 (level 0 == 0 Volt)
@@ -47,7 +48,8 @@ private:
   uint16_t _maxSteps;
   float    _mVstep;
   float    _voltage;
-  float    _level[5] = { 0, 1, 2, 3, 4 };  // default
+  float    _previous;
+  float    _level[5] = { 0, 1, 2, 3, 4 };  //  default
 };
 
 

@@ -1,7 +1,7 @@
 //
-//    FILE: rain_demo.ino
+//    FILE: rain_setLevel.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo
+// PURPOSE: demo dsetLevel getLevel
 //     URL: https://github.com/RobTillaart/RAIN
 
 
@@ -20,8 +20,9 @@ void setup()
 
   RS.begin(5.000, 1023);
 
-  //  set the levels
-  //  no need to be equi-distant
+  //  set the 4 levels
+  //  they do not need to be equi-distant
+  //  level 0 == 0 volts.
   RS.setLevel(1, 0.25);
   RS.setLevel(2, 2.75);
   RS.setLevel(3, 3.25);
@@ -35,7 +36,7 @@ void loop()
   Serial.print('\t');
   Serial.print(RS.getLevel());
   Serial.print('\n');
-  delay(10);
+  delay(100);
 }
 
 
