@@ -25,6 +25,24 @@ which goes LOW if a threshold (to be set with a potentiometer on the breakout) i
 The library is EXPERIMENTAL as it needs more testing. 
 (changes of the interface are definitely possible).
 
+## Hardware connection
+
+Typical connection
+
+```
+      Processor             LM393             SENSOR FC-37
+   +-------------+      +----------+     +---------------------+
+   |             |      |          |     |                     |
+   |         GND |----->| GND      |     |                     |
+   |    powerPin |----->| 5V       |-----|                     |
+   |    analogIn |<-----| AO       |     |                     |
+   |             |      |          |-----|                     |
+   |  digital in |<-----| DO       |     |                     |
+   |             |      |          |     |                     |
+   +-------------+      +----------+     +---------------------+
+
+```
+
 
 ## Interface
 
