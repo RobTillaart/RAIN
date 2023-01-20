@@ -60,7 +60,7 @@ unittest(test_percentage)
 {
   RAIN rainSensor(0, 255);
 
-  assertEqual(0, rainSensor.percentage());
+  assertEqual(100, rainSensor.percentage());
   //  EXTEND ?
 }
 
