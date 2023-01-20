@@ -38,7 +38,7 @@ unittest_teardown()
 }
 
 
-unittest(test_constants)  _dryRefVoltage
+unittest(test_constants)
 {
   assertEqual(1, 1);
 }
@@ -50,7 +50,7 @@ unittest(test_dryReference)
 
   for (int ref = 0; ref < 5000; ref += 500)
   {
-    rainSensor.setDryReference(ref));
+    rainSensor.setDryReference(ref);
     assertEqualFloat(ref, rainSensor.getDryReference(), 0.001);
   }
 }
@@ -93,8 +93,8 @@ unittest(test_powerDelay)
 
   for (int i = 0; i < 250; i+= 50)
   {
-    rainSensor.setPowerDelay(i));
-    assertEqual(i, rainSensor.getPowerDelay());
+    rainSensor.setPowerDelay(i);
+    assertEqual(i, rainSensor.getPowerDelay() );
   }
 }
 
